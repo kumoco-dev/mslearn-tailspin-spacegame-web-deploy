@@ -20,7 +20,7 @@ stages:
       dotnetSdkVersion: '5.x'
 
     steps:
-    - task: ServiceNow-DevOps-Server-Job-Notification@1
+    - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
         connectedServiceName: 'DevOps Connection'
         Phase: 'STARTED'
@@ -69,7 +69,12 @@ stages:
       inputs:
         connectedServiceName: 'DevOps Connection'
         Phase: 'COMPLETED'
-        
+
+    - task: ServiceNow-DevOps-Agent-Job-Notification@1
+      inputs:
+        connectedServiceName: 'DevOps Connection'
+        Phase: 'COMPLETED'
+
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
 
@@ -89,10 +94,10 @@ stages:
           steps:
           - download: current
             artifact: drop
-          - task: ServiceNow-DevOps-Server-Job-Notification@1
+          - task: ServiceNow-DevOps-Agent-Job-Notification@1
             inputs:
               connectedServiceName: 'DevOps Connection'
-              UpstreamJob: 'Build'
+              upstream: 'Build'
               Phase: 'STARTED'
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
@@ -100,8 +105,8 @@ stages:
               azureSubscription: 'Azure Connection'
               appName: '$(WebAppName)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
-          - task: ServiceNow-DevOps-Server-Job-Notification@1
+          - task: ServiceNow-DevOps-Agent-Job-Notification@1
             inputs:
               connectedServiceName: 'DevOps Connection'
-              UpstreamJob: 'Build'
+              upstream: 'Build'
               Phase: 'COMPLETED'
