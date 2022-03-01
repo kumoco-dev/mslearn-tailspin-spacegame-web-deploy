@@ -65,11 +65,7 @@ stages:
         publishWebProjects: false
         arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
         zipAfterPublish: true
-    - task: ServiceNow-DevOps-Server-Job-Notification@1
-      inputs:
-        connectedServiceName: 'DevOps Connection'
-        Phase: 'COMPLETED'
-
+        
     - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
         connectedServiceName: 'DevOps Connection'
