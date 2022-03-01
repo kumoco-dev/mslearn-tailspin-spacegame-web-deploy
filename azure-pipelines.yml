@@ -93,7 +93,6 @@ stages:
           - task: ServiceNow-DevOps-Agent-Job-Notification@1
             inputs:
               connectedServiceName: 'DevOps Connection'
-              upstream: 'Build'
               Phase: 'STARTED'
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
@@ -104,5 +103,4 @@ stages:
           - task: ServiceNow-DevOps-Agent-Job-Notification@1
             inputs:
               connectedServiceName: 'DevOps Connection'
-              upstream: 'Build'
               Phase: 'COMPLETED'
