@@ -90,17 +90,10 @@ stages:
           steps:
           - download: current
             artifact: drop
-          - task: ServiceNow-DevOps-Agent-Job-Notification@1
-            inputs:
-              connectedServiceName: 'DevOps Connection'
-              Phase: 'STARTED'
+
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Azure Connection'
               appName: '$(WebAppName)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
-          - task: ServiceNow-DevOps-Agent-Job-Notification@1
-            inputs:
-              connectedServiceName: 'DevOps Connection'
-              Phase: 'COMPLETED'
