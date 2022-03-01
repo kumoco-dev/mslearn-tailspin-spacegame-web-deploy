@@ -20,10 +20,6 @@ stages:
       dotnetSdkVersion: '5.x'
 
     steps:
-    - task: ServiceNow-DevOps-Agent-Job-Notification@1
-      inputs:
-        connectedServiceName: 'DevOps Connection'
-        Phase: 'STARTED'
       
     - task: UseDotNet@2
       displayName: 'Use .NET SDK $(dotnetSdkVersion)'
@@ -67,11 +63,6 @@ stages:
         arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
         zipAfterPublish: true
         
-    - task: ServiceNow-DevOps-Agent-Job-Notification@1
-      inputs:
-        connectedServiceName: 'DevOps Connection'
-        Phase: 'COMPLETED'
-
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
 
