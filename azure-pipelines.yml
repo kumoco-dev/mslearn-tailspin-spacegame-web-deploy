@@ -22,7 +22,7 @@ stages:
     steps:
     - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
-        connectedServiceName: 'DevOps Connection'
+        connectedServiceName: 'kumocodemo6-ServiceNowDevOps-ServiceNow DevOps Service Connection'
         Phase: 'STARTED'
     - task: UseDotNet@2
       displayName: 'Use .NET SDK $(dotnetSdkVersion)'
@@ -68,7 +68,7 @@ stages:
 
     - task: ServiceNow-DevOps-Agent-Job-Notification@1
       inputs:
-        connectedServiceName: 'DevOps Connection'
+        connectedServiceName: 'kumocodemo6-ServiceNowDevOps-ServiceNow DevOps Service Connection'
         Phase: 'COMPLETED'
 
     - publish: '$(Build.ArtifactStagingDirectory)'
@@ -93,7 +93,7 @@ stages:
 
           - task: ServiceNow-DevOps-Agent-Job-Notification@1
             inputs:
-              connectedServiceName: 'DevOps Connection'
+              connectedServiceName: 'kumocodemo6-ServiceNowDevOps-ServiceNow DevOps Service Connection'
               Phase: 'STARTED'
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
@@ -103,5 +103,5 @@ stages:
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
           - task: ServiceNow-DevOps-Agent-Job-Notification@1
             inputs:
-              connectedServiceName: 'DevOps Connection'
+              connectedServiceName: 'kumocodemo6-ServiceNowDevOps-ServiceNow DevOps Service Connection'
               Phase: 'COMPLETED'
