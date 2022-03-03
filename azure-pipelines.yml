@@ -97,20 +97,6 @@ stages:
               upstream: 'Build'
               Phase: 'STARTED'
 
-          - task: ServiceNow-DevOps-Server-Change-Acceleration@1
-            inputs:
-               connectedServiceName: 'DevOps Connection'
-               changeRequestDetails: |
-                 {
-                     "setCloseCode" : true,
-                     "attributes": {
-                       "requested_by": {
-                         "name": "test user"
-                       },
-                       "start_date": "2022-03-02 08:00:00",
-                       "end_date": "2021-03-02 18:00:00"
-                     }
-                   }
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
